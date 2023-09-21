@@ -19,7 +19,9 @@
             .querySelector("a-text")
             .setAttribute(
               "gps-entity-place",
-              `latitude: ${position.coords.latitude}; longitude: ${position.coords.longitude};`
+              `latitude: ${position.coords.latitude + 0.000008983148616}; longitude: ${position.coords.longitude};`
+              // 1m緯度 0.000008983148616
+              // 1m軽度 0.000010966382364
             );
         });
       };
