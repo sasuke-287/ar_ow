@@ -24,26 +24,26 @@
     </style>
 
     <script>
-      // window.onload = () => {
-      //   navigator.geolocation.getCurrentPosition((position) => {
-      //     document.querySelector("#shop").setAttribute(
-      //       "gps-entity-place",
-      //       `latitude: ${
-      //         position.coords.latitude + 0.000008983148616 * 15
-      //       }; longitude: ${position.coords.longitude};`
-      //       // 1m緯度 0.000008983148616
-      //       // 1m軽度 0.000010966382364
-      //     );
-      //     // document.querySelector("a-box").setAttribute(
-      //     //   "gps-entity-place",
-      //     //   `latitude: ${
-      //     //     position.coords.latitude + 0.000008983148616 * 15
-      //     //   }; longitude: ${position.coords.longitude};`
-      //     //   // 1m緯度 0.000008983148616
-      //     //   // 1m軽度 0.000010966382364
-      //     // );
-      //   });
-      // };
+      window.onload = () => {
+        navigator.geolocation.getCurrentPosition((position) => {
+          document.querySelector("#shop").setAttribute(
+            "gps-entity-place",
+            `latitude: ${
+              position.coords.latitude + 0.000008983148616 * 15
+            }; longitude: ${position.coords.longitude};`
+            // 1m緯度 0.000008983148616
+            // 1m軽度 0.000010966382364
+          );
+          // document.querySelector("a-box").setAttribute(
+          //   "gps-entity-place",
+          //   `latitude: ${
+          //     position.coords.latitude + 0.000008983148616 * 15
+          //   }; longitude: ${position.coords.longitude};`
+          //   // 1m緯度 0.000008983148616
+          //   // 1m軽度 0.000010966382364
+          // );
+        });
+      };
     </script>
     <script src="./calc.js" type="module"></script>
   </head>
@@ -56,25 +56,12 @@
       arjs="sourceType: webcam; debugUIEnabled: false;"
       renderer="logarithmicDepthBuffer: true;"
     >
-      <a-box material="color: red" 
-      gps-entity-place="latitude: 35.67142999196126; longitude: 139.77022276452675;"
-      scale="3 3 3"></a-box>
-      <a-text
-        id="shop"
-        value="No markers around"
-        look-at="[gps-camera]"
-        gps-entity-place="latitude: 35.67142999196126; longitude: 139.77022276452675;"
-        scale="5 5 5"
-        height="1"
-      ></a-text>
-      <a-text
-        id="dist"
-        value="sample"
-        look-at="[gps-camera]"
-        gps-entity-place="latitude: 35.67142999196126; longitude: 139.77022276452675;"
-        scale="5 5 5"
-        height="0.8"
-      ></a-text>
+
+    <!-- ここに描画するものを追加する -->
+    <a-ring id="shop" color="green" radius-inner="1" radius-outer="2"></a-ring>
+    <a-box></a-box>
+    <a-sphere></a-sphere>
+
 
       <a-camera gps-camera="gpsMinDistance:200;" rotation-reader> </a-camera>
     </a-scene>

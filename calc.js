@@ -49,7 +49,7 @@ window.onload = () => {
 function staticLoadPlaces() {
     return [
         {
-            name: 'Time Desk',
+            name: 'hachiban',
             location: {
                 lat: 35.67142999196126,
                 lng: 139.77022276452675,
@@ -73,8 +73,10 @@ function renderPlaces(places, pos) {
 	console.log(`heading: ${ crd.heading }`);
         cal.calcNewPosition(cal.currentPosition, cal.bearing, cal.newDistance);
         cal.calcSizeDist(cal.distance);
-        let model = document.createElement('a-box');
-        model.setAttribute('material', 'color: red');
+        let model = document.createElement('a-ring');
+        model.setAttribute('material', 'color: green');
+        model.setAttribute('material', 'radius-inner: 1');
+        model.setAttribute('material', 'radius-outer: 2');
         model.setAttribute('gps-entity-place', `latitude: ${cal.newPosition[0]}; longitude: ${cal.newPosition[1]};`);
         model.setAttribute('scale', `${cal.objectSize}`);
 
