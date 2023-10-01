@@ -74,11 +74,13 @@ function renderPlaces(places, pos) {
         cal.calcNewPosition(cal.currentPosition, cal.bearing, cal.newDistance);
         cal.calcSizeDist(cal.distance);
         let model = document.createElement('a-ring');
-        model.setAttribute('material', 'color: green');
-        model.setAttribute('material', 'radius-inner: 1');
-        model.setAttribute('material', 'radius-outer: 2');
+        model.setAttribute('color', 'green');
+        model.setAttribute('look-at', '[gps-camera]');
+        model.setAttribute('radius-inner', '1');
+        model.setAttribute('radius-outer', '5');
+        model.setAttribute('rotation', '-90 0 0');
         model.setAttribute('gps-entity-place', `latitude: ${cal.newPosition[0]}; longitude: ${cal.newPosition[1]};`);
-        model.setAttribute('scale', `${cal.objectSize}`);
+        model.setAttribute('scale', `2 2 2`);
 
         model.addEventListener('loaded', () => {
             window.dispatchEvent(new CustomEvent('gps-entity-place-loaded'))
