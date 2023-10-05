@@ -11,64 +11,21 @@
     <script src="https://unpkg.com/aframe-look-at-component@0.8.0/dist/aframe-look-at-component.min.js"></script>
 
     <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
-    <style>
-      #debug {
-        position: fixed;
-        z-index: 10000;
-        background-color: #fff;
-        padding: 10px;
-        top: 0;
-        left: 0;
-        display: block;
-      }
-    </style>
 
-    <script>
-      window.onload = () => {
-        navigator.geolocation.getCurrentPosition((position) => {
-          document.querySelector("#shop").setAttribute(
-            "gps-entity-place",
-            `latitude: ${
-              position.coords.latitude + 0.000008983148616 * 15
-            }; longitude: ${position.coords.longitude};`
-            // 1m緯度 0.000008983148616
-            // 1m軽度 0.000010966382364
-          );
-          // document.querySelector("a-box").setAttribute(
-          //   "gps-entity-place",
-          //   `latitude: ${
-          //     position.coords.latitude + 0.000008983148616 * 15
-          //   }; longitude: ${position.coords.longitude};`
-          //   // 1m緯度 0.000008983148616
-          //   // 1m軽度 0.000010966382364
-          // );
-        });
-      };
-    </script>
+    <link rel="stylesheet" href="style.css" type="text/css">
     <script src="./calc.js" type="module"></script>
   </head>
 
   <body style="margin: 0; overflow: hidden">
-    <div id="debug"></div>
     <a-scene
       vr-mode-ui="enabled: false"
       embedded
       arjs="sourceType: webcam; debugUIEnabled: false;"
       renderer="logarithmicDepthBuffer: true;"
     >
-
-    <!-- ここに描画するものを追加する -->
-
-      <a-camera gps-camera="gpsMinDistance:200;" rotation-reader> </a-camera>
+      <!-- ここに描画するものを追加する -->
+      <div id="signal_scope"></div>
+      <div id="output">ああああああああああああああああああああああああああああああああああああ</div>
     </a-scene>
-    <script>
-      window.addEventListener('load', () => {
-        const dist = document.getElementById('dist');
-        dist.addEventListener('gps-entity-place-update-positon', (event) => {
-          document.getElementById('debug').textContent = `${event.detail.distance}m left`;
-          dist.setAttribute('value', dist.getAttribute('distanceMsg') + ' left');
-        });
-      });
-    </script>
   </body>
 </html>
