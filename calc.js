@@ -20,9 +20,9 @@ function onSuccess(position) {
 
   const viewString =
     propatiesString +
-    `\n距離1：${distance}\n方角x:${direction.x}\n方角y:${direction.y}`;
+    `\n距離1：${Math.round(distance)}\n方角x:${Math.round(direction.x)}\n方角y:${Math.round(direction.y)}`;
 
-  document.getElementById("output").innerText = viewString;
+  document.getElementById("debug2").innerText = viewString;
 }
 function onError(error) {
   const propaties = [];
@@ -30,7 +30,7 @@ function onError(error) {
     propaties.push(`${key} = ${error[key]}`);
   }
   const propatiesString = propaties.reduce((pre, cur) => pre + `\n` + cur);
-  document.getElementById("output").innerText = propatiesString;
+  document.getElementById("debug2").innerText = propatiesString;
 }
 
 // 飲み屋座標
@@ -69,16 +69,16 @@ function orientationHandler(e) {
   const propaties = [];
   for (var key in e) {
     if (["alpha", "beta", "gamma"].includes(key)) {
-      propaties.push(`${key} = ${e[key]}`);
+      propaties.push(`${key} = ${Math.round(e[key])}`);
     }
   }
   const propatiesString = propaties.reduce((pre, cur) => pre + `\n` + cur);
 
   const direction = culcDirection(e.alpha, e.beta, e.gamma);
 
-  const viewString = propatiesString + `\n` + `方角：${direction}`;
+  const viewString = propatiesString + `\n` + `方角：${Math.round(direction)}`;
 
-  document.getElementById("output").innerText = viewString;
+  document.getElementById("debug").innerText = viewString;
 }
 
 function culcDirection(alpha, beta, gamma) {
