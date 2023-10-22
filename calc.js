@@ -2,6 +2,7 @@ import LatLon from "https://cdn.jsdelivr.net/npm/geodesy@2.2.1/latlon-spherical.
 
 window.onload = () => {
   if (!navigator.geolocation) return;
+  // 1000msで位置情報取得を回す
   setInterval(getPosition, 1000);
 };
 
@@ -24,6 +25,7 @@ function onSuccess(position) {
 
   document.getElementById("debug2").innerText = viewString;
 }
+
 function onError(error) {
   const propaties = [];
   for (var key in error) {

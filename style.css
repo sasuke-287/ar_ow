@@ -19,6 +19,28 @@
   mask-image: radial-gradient(transparent 60%, black 30%);
 }
 
+#near_signal_scope {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -10vmin;
+  right: 10vmin;
+  margin: auto;
+  max-width: 100%;
+  max-height: 100%;
+  /* 画面幅or画面高さの小さい方の1/6のwidthを設定 */
+  width: 16.66666666666667vmin;
+  /* 画面幅or画面高さの小さい方の1/6のheightを設定 */
+  height: 16.6666666666666vmin;
+
+  /* 色を変化させて部分的な弧を作る */
+  background-image: conic-gradient(#BB9457 0, #BB9457 50%, transparent 50%, transparent 100%);
+  background-color:transparent;
+  clip-path: circle(50%);
+  -webkit-mask-image: radial-gradient(transparent 60%, black 30%);
+  mask-image: radial-gradient(transparent 60%, black 30%);
+}
+
 #debug {
   color: red;
   position: absolute;
