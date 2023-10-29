@@ -1,9 +1,13 @@
 import LatLon from "https://cdn.jsdelivr.net/npm/geodesy@2.2.1/latlon-spherical.min.js";
 
+var directionWithTarget = {};
+var directionView = '';
+
 window.onload = () => {
   if (!navigator.geolocation) return;
   // 1000msで位置情報取得を回す
   setInterval(getPosition, 1000);
+  setInterval(culcViewAngle(), 1000);
 };
 
 function getPosition() {
@@ -24,6 +28,8 @@ function onSuccess(position) {
     `\n距離1：${Math.round(distance)}\n方角x:${Math.round(direction.x)}\n方角y:${Math.round(direction.y)}`;
 
   document.getElementById("debug2").innerText = viewString;
+
+  directionWithTarget = {distance, direction};
 }
 
 function onError(error) {
@@ -81,6 +87,8 @@ function orientationHandler(e) {
   const viewString = propatiesString + `\n` + `方角：${Math.round(direction)}`;
 
   document.getElementById("debug").innerText = viewString;
+
+  directionView = Math.round(direction);
 }
 
 function culcDirection(alpha, beta, gamma) {
@@ -98,4 +106,23 @@ function culcDirection(alpha, beta, gamma) {
 
   const direction = Math.atan2(-x, y) * (180.0 / Math.PI) + 180;
   return direction;
+}
+
+function culcViewAngle () {
+  if (Math.abs(directionView - directionWithTarget.direction.x) <= 30){
+    // 30度以下なら緑円出す
+    document.getElementById("near_signal_scope").style.display = "none";
+    document.getElementById("near_signal_scope").style.display = "block";
+    document.getElementById("debug3").innerText = "みえてるよ";
+  } else if (Math.abs(directionView - directionWithTarget.direction.x) <= 90) {
+    // 90度以下なら近接している円出す
+    document.getElementById("near_signal_scope").style.display = "block";
+    document.getElementById("signal_scope").style.display = "none";
+    document.getElementById("debug3").innerText = "ちかいよ";
+  } else {
+    // それ以外なら出さない
+    document.getElementById("near_signal_scope").style.display = "none";
+    document.getElementById("near_signal_scope").style.display = "none";
+    document.getElementById("debug3").innerText = "視界外だよ";
+  }
 }
