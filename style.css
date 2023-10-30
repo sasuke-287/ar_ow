@@ -76,8 +76,8 @@
 #debug3 {
   color: red;
   position: absolute;
-  top: -40vmin;
-  bottom: 40vmin;
+  top: -50vmin;
+  bottom: 50vmin;
   left: 0;
   right: 0;
   margin: auto;
