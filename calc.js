@@ -111,18 +111,18 @@ function culcDirection(alpha, beta, gamma) {
 function culcViewAngle () {
   if (Math.abs(directionView - directionWithTarget.direction.x) <= 30){
     // 30度以下なら緑円出す
-    document.getElementById("near_signal_scope").style.display = "none";
-    document.getElementById("near_signal_scope").style.display = "block";
+    document.getElementById("near_signal_scope").style.visibility = "hidden";
+    document.getElementById("signal_scope").style.visibility = "visible";
     document.getElementById("debug3").innerText = "みえてるよ";
   } else if (Math.abs(directionView - directionWithTarget.direction.x) <= 90) {
     // 90度以下なら近接している円出す
-    document.getElementById("near_signal_scope").style.display = "block";
-    document.getElementById("signal_scope").style.display = "none";
+    document.getElementById("near_signal_scope").style.visibility = "visible";
+    document.getElementById("signal_scope").style.visivility = "hidden";
     document.getElementById("debug3").innerText = "ちかいよ";
   } else {
     // それ以外なら出さない
-    document.getElementById("near_signal_scope").style.display = "none";
-    document.getElementById("near_signal_scope").style.display = "none";
+    document.getElementById("near_signal_scope").style.visibility = "hidden";
+    document.getElementById("signal_scope").style.visibility = "hidden";
     document.getElementById("debug3").innerText = "視界外だよ";
   }
 }
