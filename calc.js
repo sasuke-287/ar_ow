@@ -1,13 +1,13 @@
 import LatLon from "https://cdn.jsdelivr.net/npm/geodesy@2.2.1/latlon-spherical.min.js";
 
-var directionWithTarget = {};
+var distanceWithTarget = '';
+var directionWithTarget = '';
 var directionView = '';
 
 window.onload = () => {
   if (!navigator.geolocation) return;
   // 1000msで位置情報取得を回す
   setInterval(getPosition, 1000);
-  setInterval(culcViewAngle(), 1000);
 };
 
 function getPosition() {
@@ -29,7 +29,8 @@ function onSuccess(position) {
 
   document.getElementById("debug2").innerText = viewString;
 
-  directionWithTarget = {distance, direction};
+  distanceWithTarget = distance;
+  directionWithTarget = direction;
 }
 
 function onError(error) {
@@ -89,6 +90,8 @@ function orientationHandler(e) {
   document.getElementById("debug").innerText = viewString;
 
   directionView = Math.round(direction);
+
+  culcViewAngle();
 }
 
 function culcDirection(alpha, beta, gamma) {
@@ -108,23 +111,20 @@ function culcDirection(alpha, beta, gamma) {
   return direction;
 }
 
-function culcViewAngle () {
+function culcViewAngle() {
 
-  document.getElementById("debug3").innerText = Math.abs(directionView - directionWithTarget.direction.x);
+  document.getElementById("debug3").innerText = Math.abs(Math.round(directionWithTarget.x) - directionView);
   
-  if (Math.abs(directionView - directionWithTarget.direction.x) <= 30){
+  if (Math.abs(Math.round(directionWithTarget.x) - directionView) <= 30){
     // 30度以下なら緑円出す
-    // document.getElementById("debug3").innerText = `みえてるよ`;
     document.getElementById("near_signal_scope").style.visibility = "hidden";
     document.getElementById("signal_scope").style.visibility = "visible";
-  } else if (Math.abs(directionView - directionWithTarget.direction.x) <= 90) {
+  } else if (Math.abs(Math.round(directionWithTarget.x) - directionView) <= 90) {
     // 90度以下なら近接している円出す
-    // document.getElementById("debug3").innerText = `ちかいよ`;
     document.getElementById("near_signal_scope").style.visibility = "visible";
-    document.getElementById("signal_scope").style.visivility = "hidden";
+    document.getElementById("signal_scope").style.visibility = "hidden";
   } else {
     // それ以外なら出さない
-    // document.getElementById("debug3").innerText = `視界外だよ`;
     document.getElementById("near_signal_scope").style.visibility = "hidden";
     document.getElementById("signal_scope").style.visibility = "hidden";
   }
