@@ -112,20 +112,38 @@ function culcDirection(alpha, beta, gamma) {
 }
 
 function culcViewAngle() {
+  let angleDifference = Math.abs(Math.round(directionWithTarget.x) - directionView);
 
-  document.getElementById("debug3").innerText = Math.abs(Math.round(directionWithTarget.x) - directionView);
+  // 360度をまたいだ時用コード
+  if (angleDifference > 180) {
+    angleDifference = 360 - angleDifference;
+  }
+
+  document.getElementById("debug3").innerText = angleDifference;
   
-  if (Math.abs(Math.round(directionWithTarget.x) - directionView) <= 30){
-    // 30度以下なら緑円出す
-    document.getElementById("near_signal_scope").style.visibility = "hidden";
+  if (angleDifference <= 30){
+    // 30度以下なら緑円を表示
+    document.getElementById("near_signal_scope_left").style.visibility = "hidden";
+    document.getElementById("near_signal_scope_right").style.visibility = "hidden";
     document.getElementById("signal_scope").style.visibility = "visible";
-  } else if (Math.abs(Math.round(directionWithTarget.x) - directionView) <= 90) {
-    // 90度以下なら近接している円出す
-    document.getElementById("near_signal_scope").style.visibility = "visible";
+  } else if (angleDifference <= 90) {
+    // 90度以下なら両側の半円を表示
+    document.getElementById("near_signal_scope_left").style.visibility = "visible";
+    document.getElementById("near_signal_scope_right").style.visibility = "visible";
     document.getElementById("signal_scope").style.visibility = "hidden";
+
+    // size max 20vmin ~ min 10vmin
+    const nearSignalSize = -0.1 * angleDifference + 23;
+    // position max 20vmin ~ min 5vmin
+    const nearSignalPosition = 0.25 * angleDifference - 2.5;
+
+    // 両側の半円の大きさと位置を変更する
+    document.documentElement.style.setProperty( '--near_signal_width_and_height', nearSignalSize + 'vmin');
+    document.documentElement.style.setProperty( '--near_signal_left_and_right', nearSignalPosition + 'vmin');
   } else {
     // それ以外なら出さない
-    document.getElementById("near_signal_scope").style.visibility = "hidden";
+    document.getElementById("near_signal_scope_left").style.visibility = "hidden";
+    document.getElementById("near_signal_scope_right").style.visibility = "hidden";
     document.getElementById("signal_scope").style.visibility = "hidden";
   }
 }
