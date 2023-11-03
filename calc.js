@@ -132,8 +132,8 @@ function culcViewAngle() {
     document.getElementById("near_signal_scope_right").style.visibility = "visible";
     document.getElementById("signal_scope").style.visibility = "hidden";
 
-    // size max 20vmin ~ min 10vmin
-    const nearSignalSize = -0.1 * angleDifference + 23;
+    // size max 25vmin ~ min 15vmin
+    const nearSignalSize = -0.16 * angleDifference + 30;
     // position max 20vmin ~ min 5vmin
     const nearSignalPosition = 0.25 * angleDifference - 2.5;
 

@@ -1,5 +1,5 @@
 :root {
-  --near_signal_width_and_height: 16.66666666666667vmin;
+  --near_signal_width_and_height: 25vmin;
   --near_signal_left_and_right: 10vmin;
   --near_signal_color: #BB9457;
 }
@@ -13,10 +13,10 @@
   margin: auto;
   max-width: 100%;
   max-height: 100%;
-  /* 画面幅or画面高さの小さい方の1/6のwidthを設定 */
-  width: 16.66666666666667vmin;
-  /* 画面幅or画面高さの小さい方の1/6のheightを設定 */
-  height: 16.6666666666666vmin;
+  /* 画面幅or画面高さの小さい方の1/4のwidthを設定 */
+  width: 25vmin;
+  /* 画面幅or画面高さの小さい方の1/4のheightを設定 */
+  height: 25vmin;
   background-color: #57e085;
 
   /* 緑サークル表示 */
@@ -34,9 +34,7 @@
   margin: auto;
   max-width: 100%;
   max-height: 100%;
-  /* 画面幅or画面高さの小さい方の1/6のwidthを設定 */
   width: var(--near_signal_width_and_height);
-  /* 画面幅or画面高さの小さい方の1/6のheightを設定 */
   height: var(--near_signal_width_and_height);
 
   /* 色を変化させて部分的な弧を作る */
