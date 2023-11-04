@@ -81,6 +81,7 @@
   width: 50vmin;
   /* 画面幅or画面高さの小さい方の1/2のheightを設定 */
   height: 50vmin;
+  visibility: hidden;
 }
 
 #debug2 {
@@ -97,6 +98,7 @@
   width: 50vmin;
   /* 画面幅or画面高さの小さい方の1/2のheightを設定 */
   height: 50vmin;
+  visibility: hidden;
 }
 
 #debug3 {
@@ -113,4 +115,5 @@
   width: 50vmin;
   /* 画面幅or画面高さの小さい方の1/2のheightを設定 */
   height: 50vmin;
+  visibility: hidden;
 }

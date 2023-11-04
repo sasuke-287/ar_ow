@@ -147,3 +147,23 @@ function culcViewAngle() {
     document.getElementById("signal_scope").style.visibility = "hidden";
   }
 }
+
+document.body.addEventListener('click', handleClick);
+
+let clickCount = 0;
+
+function handleClick() {
+  clickCount++;
+
+  if (clickCount === 5) {
+    document.getElementById("debug").style.visibility = "visible";
+    document.getElementById("debug2").style.visibility = "visible";
+    document.getElementById("debug3").style.visibility = "visible";
+  } else if (clickCount === 10) {
+    document.getElementById("debug").style.visibility = "hidden";
+    document.getElementById("debug2").style.visibility = "hidden";
+    document.getElementById("debug3").style.visibility = "hidden";
+
+    clickCount = 0;
+  }
+}
