@@ -1,7 +1,7 @@
 :root {
   --near_signal_width_and_height: 25vmin;
   --near_signal_left_and_right: 10vmin;
-  --near_signal_color: #BB9457;
+  --near_signal_color: #bb9457;
 }
 
 #signal_scope {
@@ -25,6 +25,31 @@
   mask-image: radial-gradient(transparent 60%, black 30%);
 }
 
+#display {
+  position: absolute;
+  top: 30vmin;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  text-align: center;
+  margin: auto;
+  max-width: 100%;
+  max-height: 100%;
+  /* 画面幅or画面高さの小さい方の1/4のwidthを設定 */
+  width: 25vmin;
+  height: 2vmin;
+
+  font-size: 2em;
+
+  #destination_display {
+    color: white;
+  }
+  #range_display {
+    color: orange;
+  }
+}
+
 #near_signal_scope_left {
   position: absolute;
   top: 0;
@@ -38,8 +63,13 @@
   height: var(--near_signal_width_and_height);
 
   /* 色を変化させて部分的な弧を作る */
-  background-image: conic-gradient(transparent 0, transparent 50%, var(--near_signal_color) 50%, var(--near_signal_color) 100%);
-  background-color:transparent;
+  background-image: conic-gradient(
+    transparent 0,
+    transparent 50%,
+    var(--near_signal_color) 50%,
+    var(--near_signal_color) 100%
+  );
+  background-color: transparent;
   clip-path: circle(50%);
   -webkit-mask-image: radial-gradient(transparent 60%, black 30%);
   mask-image: radial-gradient(transparent 60%, black 30%);
@@ -60,8 +90,13 @@
   height: var(--near_signal_width_and_height);
 
   /* 色を変化させて部分的な弧を作る */
-  background-image: conic-gradient(var(--near_signal_color) 0, var(--near_signal_color) 50%, transparent 50%, transparent 100%);
-  background-color:transparent;
+  background-image: conic-gradient(
+    var(--near_signal_color) 0,
+    var(--near_signal_color) 50%,
+    transparent 50%,
+    transparent 100%
+  );
+  background-color: transparent;
   clip-path: circle(50%);
   -webkit-mask-image: radial-gradient(transparent 60%, black 30%);
   mask-image: radial-gradient(transparent 60%, black 30%);
