@@ -167,3 +167,31 @@ function handleClick() {
     clickCount = 0;
   }
 }
+
+function drawWave() {
+  const canvas = document.getElementById('signal_wave');
+  const ctx = canvas.getContext('2d');
+
+  // 波のパラメータ
+  const amplitude = 50; // 振幅
+  const frequency = 0.02; // 周波数
+  let phase = 0; // 位相
+
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  ctx.beginPath();
+  for (let x = 0; x < canvas.width; x += 5) {
+      const y = amplitude * Math.sin(frequency * x + phase) + canvas.height / 2;
+      ctx.lineTo(x, y);
+  }
+  ctx.strokeStyle = 'blue';
+  ctx.lineWidth = 2;
+  ctx.stroke();
+
+  // 位相を更新してアニメーションを実現
+  phase += 0.1;
+
+  requestAnimationFrame(drawWave);
+}
+
+drawWave();
