@@ -1,5 +1,6 @@
 import LatLon from "https://cdn.jsdelivr.net/npm/geodesy@2.2.1/latlon-spherical.min.js";
 
+var os;
 var distanceWithTarget = '';
 var directionWithTarget = '';
 var directionView = '';
@@ -8,6 +9,8 @@ window.onload = () => {
   if (!navigator.geolocation) return;
   // 1000msで位置情報取得を回す
   setInterval(getPosition, 1000);
+
+  init();
 };
 
 function getPosition() {
@@ -72,7 +75,46 @@ function convert(arg) {
   return (360 - arg + 180) % 360;
 }
 
-window.addEventListener("deviceorientation", orientationHandler, true);
+function init() {
+  // 簡易的なOS判定
+  os = detectOSSimply();
+  if (os == "iphone") {
+      // safari用。DeviceOrientation APIの使用をユーザに許可して貰う
+      document.querySelector("#permit").addEventListener("click", permitDeviceOrientationForSafari);
+
+      window.addEventListener(
+          "deviceorientation",
+          orientationHandler,
+          true
+      );
+  } else if (os == "android") {
+      window.addEventListener(
+          "deviceorientationabsolute",
+          orientationHandler,
+          true
+      );
+  } else{
+      window.alert("スマホブラウザで開いてください!!");
+  }
+}
+
+function detectOSSimply() {
+  let ret;
+  if (
+      navigator.userAgent.indexOf("iPhone") > 0 ||
+      navigator.userAgent.indexOf("iPad") > 0 ||
+      navigator.userAgent.indexOf("iPod") > 0
+  ) {
+      // iPad OS13のsafariはデフォルト「Macintosh」なので別途要対応
+      ret = "iphone";
+  } else if (navigator.userAgent.indexOf("Android") > 0) {
+      ret = "android";
+  } else {
+      ret = "pc";
+  }
+
+  return ret;
+}
 
 function orientationHandler(e) {
   const propaties = [];
@@ -83,7 +125,14 @@ function orientationHandler(e) {
   }
   const propatiesString = propaties.reduce((pre, cur) => pre + `\n` + cur);
 
-  const direction = culcDirection(e.alpha, e.beta, e.gamma);
+  let direction;
+  if(os == "iphone") {
+    // webkitCompasssHeading値を採用
+    direction = event.webkitCompassHeading;
+  }else{
+    // deviceorientationabsoluteイベントのalphaを補正
+    direction = culcDirection(e.alpha, e.beta, e.gamma);
+  }
 
   const viewString = propatiesString + `\n` + `方角：${Math.round(direction)}`;
 
@@ -146,6 +195,19 @@ function culcViewAngle() {
     document.getElementById("near_signal_scope_right").style.visibility = "hidden";
     document.getElementById("signal_scope").style.visibility = "hidden";
   }
+}
+
+function permitDeviceOrientationForSafari() {
+  DeviceOrientationEvent.requestPermission()
+      .then(response => {
+          if (response === "granted") {
+              window.addEventListener(
+                  "deviceorientation",
+                  detectDirection
+              );
+          }
+      })
+      .catch(console.error);
 }
 
 document.body.addEventListener('click', handleClick);
