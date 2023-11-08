@@ -72,7 +72,7 @@ function convert(arg) {
   return (360 - arg + 180) % 360;
 }
 
-window.addEventListener("deviceorientationabsolute", orientationHandler, true);
+window.addEventListener("deviceorientation", orientationHandler, true);
 
 function orientationHandler(e) {
   const propaties = [];
