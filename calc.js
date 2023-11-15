@@ -1,9 +1,8 @@
 import LatLon from "https://cdn.jsdelivr.net/npm/geodesy@2.2.1/latlon-spherical.min.js";
 
-var os;
-var distanceWithTarget = '';
-var directionWithTarget = '';
-var directionView = '';
+var distanceWithTarget = "";
+var directionWithTarget = "";
+var directionView = "";
 
 window.onload = () => {
   if (!navigator.geolocation) return;
@@ -28,7 +27,9 @@ function onSuccess(position) {
 
   const viewString =
     propatiesString +
-    `\n距離1：${Math.round(distance)}\n方角x:${Math.round(direction.x)}\n方角y:${Math.round(direction.y)}`;
+    `\n距離1：${Math.round(distance)}\n方角x:${Math.round(
+      direction.x
+    )}\n方角y:${Math.round(direction.y)}`;
 
   document.getElementById("debug2").innerText = viewString;
 
@@ -75,46 +76,7 @@ function convert(arg) {
   return (360 - arg + 180) % 360;
 }
 
-function init() {
-  // 簡易的なOS判定
-  os = detectOSSimply();
-  if (os == "iphone") {
-      // safari用。DeviceOrientation APIの使用をユーザに許可して貰う
-      document.querySelector("#permit").addEventListener("click", permitDeviceOrientationForSafari);
-
-      window.addEventListener(
-          "deviceorientation",
-          orientationHandler,
-          true
-      );
-  } else if (os == "android") {
-      window.addEventListener(
-          "deviceorientationabsolute",
-          orientationHandler,
-          true
-      );
-  } else{
-      window.alert("スマホブラウザで開いてください!!");
-  }
-}
-
-function detectOSSimply() {
-  let ret;
-  if (
-      navigator.userAgent.indexOf("iPhone") > 0 ||
-      navigator.userAgent.indexOf("iPad") > 0 ||
-      navigator.userAgent.indexOf("iPod") > 0
-  ) {
-      // iPad OS13のsafariはデフォルト「Macintosh」なので別途要対応
-      ret = "iphone";
-  } else if (navigator.userAgent.indexOf("Android") > 0) {
-      ret = "android";
-  } else {
-      ret = "pc";
-  }
-
-  return ret;
-}
+window.addEventListener("deviceorientationabsolute", orientationHandler, true);
 
 function orientationHandler(e) {
   const propaties = [];
@@ -125,14 +87,8 @@ function orientationHandler(e) {
   }
   const propatiesString = propaties.reduce((pre, cur) => pre + `\n` + cur);
 
-  let direction;
-  if(os == "iphone") {
-    // webkitCompasssHeading値を採用
-    direction = event.webkitCompassHeading;
-  }else{
-    // deviceorientationabsoluteイベントのalphaを補正
-    direction = culcDirection(e.alpha, e.beta, e.gamma);
-  }
+  // deviceorientationabsoluteイベントのalphaを補正
+  direction = culcDirection(e.alpha, e.beta, e.gamma);
 
   const viewString = propatiesString + `\n` + `方角：${Math.round(direction)}`;
 
@@ -161,7 +117,9 @@ function culcDirection(alpha, beta, gamma) {
 }
 
 function culcViewAngle() {
-  let angleDifference = Math.abs(Math.round(directionWithTarget.x) - directionView);
+  let angleDifference = Math.abs(
+    Math.round(directionWithTarget.x) - directionView
+  );
 
   // 360度をまたいだ時用コード
   if (angleDifference > 180) {
@@ -169,16 +127,20 @@ function culcViewAngle() {
   }
 
   document.getElementById("debug3").innerText = angleDifference;
-  
-  if (angleDifference <= 30){
+
+  if (angleDifference <= 30) {
     // 30度以下なら緑円を表示
-    document.getElementById("near_signal_scope_left").style.visibility = "hidden";
-    document.getElementById("near_signal_scope_right").style.visibility = "hidden";
+    document.getElementById("near_signal_scope_left").style.visibility =
+      "hidden";
+    document.getElementById("near_signal_scope_right").style.visibility =
+      "hidden";
     document.getElementById("signal_scope").style.visibility = "visible";
   } else if (angleDifference <= 90) {
     // 90度以下なら両側の半円を表示
-    document.getElementById("near_signal_scope_left").style.visibility = "visible";
-    document.getElementById("near_signal_scope_right").style.visibility = "visible";
+    document.getElementById("near_signal_scope_left").style.visibility =
+      "visible";
+    document.getElementById("near_signal_scope_right").style.visibility =
+      "visible";
     document.getElementById("signal_scope").style.visibility = "hidden";
 
     // size max 25vmin ~ min 15vmin
@@ -187,30 +149,25 @@ function culcViewAngle() {
     const nearSignalPosition = 0.25 * angleDifference - 2.5;
 
     // 両側の半円の大きさと位置を変更する
-    document.documentElement.style.setProperty( '--near_signal_width_and_height', nearSignalSize + 'vmin');
-    document.documentElement.style.setProperty( '--near_signal_left_and_right', nearSignalPosition + 'vmin');
+    document.documentElement.style.setProperty(
+      "--near_signal_width_and_height",
+      nearSignalSize + "vmin"
+    );
+    document.documentElement.style.setProperty(
+      "--near_signal_left_and_right",
+      nearSignalPosition + "vmin"
+    );
   } else {
     // それ以外なら出さない
-    document.getElementById("near_signal_scope_left").style.visibility = "hidden";
-    document.getElementById("near_signal_scope_right").style.visibility = "hidden";
+    document.getElementById("near_signal_scope_left").style.visibility =
+      "hidden";
+    document.getElementById("near_signal_scope_right").style.visibility =
+      "hidden";
     document.getElementById("signal_scope").style.visibility = "hidden";
   }
 }
 
-function permitDeviceOrientationForSafari() {
-  DeviceOrientationEvent.requestPermission()
-      .then(response => {
-          if (response === "granted") {
-              window.addEventListener(
-                  "deviceorientation",
-                  detectDirection
-              );
-          }
-      })
-      .catch(console.error);
-}
-
-document.body.addEventListener('click', handleClick);
+document.body.addEventListener("click", handleClick);
 
 let clickCount = 0;
 
@@ -230,8 +187,8 @@ function handleClick() {
   }
 }
 
-const canvas = document.getElementById('signal_wave');
-const ctx = canvas.getContext('2d');
+const canvas = document.getElementById("signal_wave");
+const ctx = canvas.getContext("2d");
 
 // 波のパラメータ
 const amplitude = 50; // 振幅
@@ -244,10 +201,10 @@ function drawWave() {
 
   ctx.beginPath();
   for (let x = 0; x < canvas.width; x += 5) {
-      const y = amplitude * Math.sin(frequency * x + phase) + canvas.height / 2;
-      ctx.lineTo(x, y);
+    const y = amplitude * Math.sin(frequency * x + phase) + canvas.height / 2;
+    ctx.lineTo(x, y);
   }
-  ctx.strokeStyle = 'green';
+  ctx.strokeStyle = "green";
   ctx.lineWidth = 2;
   ctx.stroke();
 
