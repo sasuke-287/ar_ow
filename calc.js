@@ -1,5 +1,7 @@
 import LatLon from "https://cdn.jsdelivr.net/npm/geodesy@2.2.1/latlon-spherical.min.js";
 
+const ua = new UAParser();
+
 var distanceWithTarget = "";
 var directionWithTarget = "";
 var directionView = "";
@@ -76,21 +78,61 @@ function convert(arg) {
   return (360 - arg + 180) % 360;
 }
 
-window.addEventListener("deviceorientationabsolute", orientationHandler, true);
+// iPhone + Safariの場合はDeviceOrientation APIの使用許可をユーザに求める
+function permitDeviceOrientationForSafari() {
+    DeviceOrientationEvent.requestPermission().then(function (response) {
+      if (response === 'granted') {
+        // 許可
+        alert("ありがとう!");
+        window.addEventListener("deviceorientation", orientationHandler, true);
+      }
+    }).catch(function (e) {
+      alert(e);
+      console.error(e);
+    });
+}
+
+function init() {
+  switch (ua.getOS().name) {
+    case "Android":
+      window.addEventListener(
+        "deviceorientationabsolute",
+        orientationHandler,
+        true
+      );
+      break;
+    case "iOS":
+      // safari用。DeviceOrientation APIの使用をユーザに許可して貰う
+      document
+        .querySelector("#permit")
+        .addEventListener("click", permitDeviceOrientationForSafari);
+
+      break;
+    default:
+      alert("スマホでアクセスしてください!");
+  }
+}
 
 function orientationHandler(e) {
-  const propaties = [];
-  for (var key in e) {
-    if (["alpha", "beta", "gamma"].includes(key)) {
-      propaties.push(`${key} = ${Math.round(e[key])}`);
-    }
+  var absolute = e.absolute;
+  var alpha = e.alpha;
+  var beta = e.beta;
+  var gamma = e.gamma;
+  var direction;
+
+  document.getElementById("debug").innerText = "テスト";
+
+  switch (ua.getOS().name) {
+    case "Android":
+      // deviceorientationabsoluteイベントのalphaを補正
+      direction = culcDirection(alpha, beta, gamma);
+      break;
+    case "iOS":
+      direction = e.webkitCompassHeading;
+      break;
   }
-  const propatiesString = propaties.reduce((pre, cur) => pre + `\n` + cur);
 
-  // deviceorientationabsoluteイベントのalphaを補正
-  direction = culcDirection(e.alpha, e.beta, e.gamma);
-
-  const viewString = propatiesString + `\n` + `方角：${Math.round(direction)}`;
+  const viewString = `方角：${Math.round(direction)}`;
 
   document.getElementById("debug").innerText = viewString;
 
