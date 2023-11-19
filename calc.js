@@ -78,20 +78,6 @@ function convert(arg) {
   return (360 - arg + 180) % 360;
 }
 
-// iPhone + Safariの場合はDeviceOrientation APIの使用許可をユーザに求める
-function permitDeviceOrientationForSafari() {
-    DeviceOrientationEvent.requestPermission().then(function (response) {
-      if (response === 'granted') {
-        // 許可
-        alert("ありがとう!");
-        window.addEventListener("deviceorientation", orientationHandler, true);
-      }
-    }).catch(function (e) {
-      alert(e);
-      console.error(e);
-    });
-}
-
 function init() {
   switch (ua.getOS().name) {
     case "Android":
@@ -102,11 +88,11 @@ function init() {
       );
       break;
     case "iOS":
-      // safari用。DeviceOrientation APIの使用をユーザに許可して貰う
-      document
-        .querySelector("#permit")
-        .addEventListener("click", permitDeviceOrientationForSafari);
-
+      window.addEventListener(
+        "deviceorientation",
+        orientationHandler,
+        true
+      );      
       break;
     default:
       alert("スマホでアクセスしてください!");
@@ -119,8 +105,6 @@ function orientationHandler(e) {
   var beta = e.beta;
   var gamma = e.gamma;
   var direction;
-
-  document.getElementById("debug").innerText = "テスト";
 
   switch (ua.getOS().name) {
     case "Android":
