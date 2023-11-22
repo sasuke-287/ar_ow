@@ -164,6 +164,7 @@ function culcViewAngle() {
     document.getElementById("near_signal_scope_right").style.visibility =
       "hidden";
     document.getElementById("signal_scope").style.visibility = "visible";
+    document.getElementById("display").style.visibility = "visible";
   } else if (angleDifference <= 90) {
     // 90度以下なら両側の半円を表示
     document.getElementById("near_signal_scope_left").style.visibility =
@@ -171,6 +172,7 @@ function culcViewAngle() {
     document.getElementById("near_signal_scope_right").style.visibility =
       "visible";
     document.getElementById("signal_scope").style.visibility = "hidden";
+    document.getElementById("display").style.visibility = "visible";
 
     // size max 25vmin ~ min 15vmin
     const nearSignalSize = -0.16 * angleDifference + 30;
@@ -193,6 +195,7 @@ function culcViewAngle() {
     document.getElementById("near_signal_scope_right").style.visibility =
       "hidden";
     document.getElementById("signal_scope").style.visibility = "hidden";
+    document.getElementById("display").style.visibility = "hidden";
   }
 }
 

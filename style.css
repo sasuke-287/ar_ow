@@ -57,6 +57,8 @@
 
   font-size: 2em;
 
+  white-space:nowrap
+
   #destination_display {
     color: white;
   }
