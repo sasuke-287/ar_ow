@@ -34,7 +34,7 @@ function onSuccess(position) {
     )}\n方角y:${Math.round(direction.y)}`;
 
   document.getElementById("debug2").innerText = viewString;
-  document.getElementById("range_display").innerText = "${Math.round(distance)}m";
+  document.getElementById("range_display").innerText = `${Math.round(distance)}m`;
 
   distanceWithTarget = distance;
   directionWithTarget = direction;
