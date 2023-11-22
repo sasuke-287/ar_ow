@@ -34,6 +34,7 @@ function onSuccess(position) {
     )}\n方角y:${Math.round(direction.y)}`;
 
   document.getElementById("debug2").innerText = viewString;
+  document.getElementById("range_display").innerText = "${Math.round(distance)}m";
 
   distanceWithTarget = distance;
   directionWithTarget = direction;
@@ -143,7 +144,7 @@ function culcDirection(alpha, beta, gamma) {
 }
 
 function culcViewAngle() {
-  let angleDifference = Math.abs(
+  var angleDifference = Math.abs(
     Math.round(directionWithTarget.x) - directionView
   );
 
@@ -195,7 +196,7 @@ function culcViewAngle() {
 
 document.body.addEventListener("click", handleClick);
 
-let clickCount = 0;
+var clickCount = 0;
 
 function handleClick() {
   clickCount++;
@@ -218,15 +219,15 @@ const ctx = canvas.getContext("2d");
 
 // 波のパラメータ
 const amplitude = 50; // 振幅
-const frequency = 0.002; // 周波数
-let phase = 0; // 位相
-let phasespeed = 0.05;
+var frequency = 0.002; // 周波数
+var phase = 0; // 位相
+var phasespeed = 0.05;
 
 function drawWave() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
   ctx.beginPath();
-  for (let x = 0; x < canvas.width; x += 5) {
+  for (var x = 0; x < canvas.width; x += 5) {
     const y = amplitude * Math.sin(frequency * x + phase) + canvas.height / 2;
     ctx.lineTo(x, y);
   }
