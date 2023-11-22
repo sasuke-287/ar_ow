@@ -34,6 +34,7 @@ function onSuccess(position) {
     )}\n方角y:${Math.round(direction.y)}`;
 
   document.getElementById("debug2").innerText = viewString;
+  document.getElementById("destination_display").innerText = `${target.name}:`;
   document.getElementById("range_display").innerText = `${Math.round(distance)}m`;
 
   distanceWithTarget = distance;
@@ -51,6 +52,7 @@ function onError(error) {
 
 // 飲み屋座標
 const target = {
+  name: '八蛮',
   latitude: 35.67142999196126,
   longitude: 139.77022276452675,
   altitude: 45,
