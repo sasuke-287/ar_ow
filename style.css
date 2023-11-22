@@ -4,20 +4,6 @@
   --near_signal_color: #bb9457;
 }
 
-#iospermit {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  margin: auto;
-  max-width: 100%;
-  max-height: 100%;
-  /* 画面幅or画面高さの小さい方の1/4のwidthを設定 */
-  width: 25vmin;
-  /* 画面幅or画面高さの小さい方の1/4のheightを設定 */
-  height: 25vmin;
-}
 
 #signal_scope {
   position: absolute;
