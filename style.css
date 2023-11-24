@@ -39,17 +39,9 @@
   max-height: 100%;
 
   height: 2vmin;
-
   font-size: 2em;
-
   white-space:nowrap;
-
-  #destination_display {
-    color: white;
-  }
-  #range_display {
-    color: orange;
-  }
+  color: white;
 }
 
 #signal_wave {
