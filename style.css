@@ -5,7 +5,7 @@
 }
 
 #signal_scope {
-  position: absolute;
+  position: fixed;
   top: 0;
   bottom: 0;
   left: 0;
@@ -26,7 +26,7 @@
 }
 
 #display {
-  position: absolute;
+  position: fixed;
   top: 30vmin;
   bottom: 0;
   left: 0;
@@ -44,7 +44,7 @@
 }
 
 #signal_display {
-  position: absolute;
+  position: fixed;
   top: auto;
   bottom: 0;
   left: 0;
@@ -74,7 +74,7 @@
 }
 
 #near_signal_scope_left {
-  position: absolute;
+  position: fixed;
   top: 0;
   bottom: 0;
   left: calc(var(--near_signal_left_and_right) * -1);
@@ -99,7 +99,7 @@
 }
 
 #near_signal_scope_right {
-  position: absolute;
+  position: fixed;
   top: 0;
   bottom: 0;
   left: var(--near_signal_left_and_right);
@@ -127,7 +127,7 @@
 
 #debug {
   color: red;
-  position: absolute;
+  position: fixed;
   top: 30vmin;
   bottom: -30vmin;
   left: 0;
@@ -144,7 +144,7 @@
 
 #debug2 {
   color: red;
-  position: absolute;
+  position: fixed;
   top: -40vmin;
   bottom: 40vmin;
   left: 0;
@@ -161,7 +161,7 @@
 
 #debug3 {
   color: red;
-  position: absolute;
+  position: fixed;
   top: -50vmin;
   bottom: 50vmin;
   left: 0;
