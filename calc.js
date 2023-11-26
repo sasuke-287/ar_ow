@@ -35,7 +35,9 @@ function onSuccess(position) {
 
   document.getElementById("debug2").innerText = viewString;
   document.getElementById("destination_display").innerText = `${target.name}:`;
-  document.getElementById("range_display").innerText = `${Math.round(distance)}m`;
+  document.getElementById("range_display").innerText = `${Math.round(
+    distance
+  )}m`;
 
   distanceWithTarget = distance;
   directionWithTarget = direction;
@@ -52,7 +54,7 @@ function onError(error) {
 
 // 飲み屋座標
 const target = {
-  name: '八蛮',
+  name: "八蛮",
   latitude: 35.67142999196126,
   longitude: 139.77022276452675,
   altitude: 45,
@@ -91,11 +93,7 @@ function init() {
       );
       break;
     case "iOS":
-      window.addEventListener(
-        "deviceorientation",
-        orientationHandler,
-        true
-      );      
+      window.addEventListener("deviceorientation", orientationHandler, true);
       break;
     default:
       alert("スマホでアクセスしてください!");
@@ -224,12 +222,26 @@ const ctx = canvas.getContext("2d");
 
 // 波のパラメータ
 const amplitude = 50; // 振幅
-var frequency = 0.002; // 周波数
+var frequency = 0.05; // 周波数
 var phase = 0; // 位相
 var phasespeed = 0.05;
 
 function drawWave() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  // 左側の枠線
+  ctx.beginPath();
+  ctx.moveTo(10, 10); // 開始点の座標
+  ctx.lineTo(10, canvas.height - 10); // 終了点の座標
+  ctx.lineWidth = 4;
+  ctx.stroke();
+
+  // 右側の枠線
+  ctx.beginPath();
+  ctx.moveTo(canvas.width - 10, 10); // 開始点の座標
+  ctx.lineTo(canvas.width - 10, canvas.height - 10); // 終了点の座標
+  ctx.lineWidth = 4;
+  ctx.stroke();
 
   ctx.beginPath();
   for (var x = 0; x < canvas.width; x += 5) {
@@ -237,7 +249,7 @@ function drawWave() {
     ctx.lineTo(x, y);
   }
   ctx.strokeStyle = "green";
-  ctx.lineWidth = 2;
+  ctx.lineWidth = 4;
   ctx.stroke();
 
   // 位相を更新してアニメーションを実現

@@ -59,12 +59,17 @@
 
   & span {
     display: block;
-    height: 1em;
-    font-size: 1em;
+    height: 1.5em;
+    font-size: 1.5em;
   }
 
   .target_name {
     color: darkgoldenrod;
+  }
+
+  #signal_wave {
+    /* ウィンドウの高さの1/10 */
+    height: 10vh;
   }
 }
 
