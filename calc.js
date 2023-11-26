@@ -24,17 +24,6 @@ const boardgame = {
 
 var target = izakaya;
 
-document.getElementById('toggleSwitch').addEventListener('change', function() {
-  // トグルスイッチが変更されたときの処理を追加
-  if (this.checked) {
-    // チェックされている場合の処理
-    target = izakaya;
-  } else {
-    // チェックされていない場合の処理
-    target = boardgame;
-  }
-});
-
 window.onload = () => {
   if (!navigator.geolocation) return;
   // 1000msで位置情報取得を回す
@@ -225,16 +214,14 @@ var clickCount = 0;
 function handleClick() {
   clickCount++;
 
-  if (clickCount === 5) {
-    document.getElementById("debug").style.visibility = "visible";
-    document.getElementById("debug2").style.visibility = "visible";
-    document.getElementById("debug3").style.visibility = "visible";
-  } else if (clickCount === 10) {
-    document.getElementById("debug").style.visibility = "hidden";
-    document.getElementById("debug2").style.visibility = "hidden";
-    document.getElementById("debug3").style.visibility = "hidden";
-
-    clickCount = 0;
+  if (clickCount % 5 === 0) {
+    if (clickCount % 10 === 0) {
+      // 10回ごとの処理
+      target = izakaya;
+    } else {
+      // 5回ごとの処理
+      target = boardgame;
+    }
   }
 }
 
