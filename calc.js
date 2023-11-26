@@ -6,6 +6,35 @@ var distanceWithTarget = "";
 var directionWithTarget = "";
 var directionView = "";
 
+// 飲み屋座標
+const izakaya = {
+  name: "八蛮",
+  latitude: 35.67142999196126,
+  longitude: 139.77022276452675,
+  altitude: 45,
+};
+
+// 飲み屋座標
+const boardgame = {
+  name: "ボドゲ会",
+  latitude: 35.667607000000004,
+  longitude: 139.7637315,
+  altitude: 45,
+};
+
+var target = izakaya;
+
+document.getElementById('toggleSwitch').addEventListener('change', function() {
+  // トグルスイッチが変更されたときの処理を追加
+  if (this.checked) {
+    // チェックされている場合の処理
+    target = izakaya;
+  } else {
+    // チェックされていない場合の処理
+    target = boardgame;
+  }
+});
+
 window.onload = () => {
   if (!navigator.geolocation) return;
   // 1000msで位置情報取得を回す
@@ -51,14 +80,6 @@ function onError(error) {
   const propatiesString = propaties.reduce((pre, cur) => pre + `\n` + cur);
   document.getElementById("debug2").innerText = propatiesString;
 }
-
-// 飲み屋座標
-const target = {
-  name: "八蛮",
-  latitude: 35.67142999196126,
-  longitude: 139.77022276452675,
-  altitude: 45,
-};
 
 function getDistanceAndDirection(params) {
   const selfPosition = new LatLon(params.latitude, params.longitude);
