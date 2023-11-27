@@ -230,9 +230,9 @@ const ctx = canvas.getContext("2d");
 
 // 波のパラメータ
 const amplitude = 50; // 振幅
-var frequency = 0.05; // 周波数
+var frequency = 0.05 + directionView / 360 * 0.2; // 周波数
 var phase = 0; // 位相
-var phasespeed = 0.05;
+var phasespeed = 0.05 + directionView / 360 * 0.1;
 
 function drawWave() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
