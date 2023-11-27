@@ -267,3 +267,27 @@ function drawWave() {
 }
 
 drawWave();
+
+// URLからクエリパラメーターを取得
+const queryString = window.location.search;
+
+// クエリパラメーターをオブジェクトに変換する関数
+function getQueryParameters(queryString) {
+    const params = new URLSearchParams(queryString);
+    const paramObj = {};
+    for (const [key, value] of params.entries()) {
+        paramObj[key] = value;
+    }
+    return paramObj;
+}
+
+// オブジェクトに変換したクエリパラメーターを取得
+const queryParams = getQueryParameters(queryString);
+
+// "debug" パラメーターが存在する場合、debug モードを有効にする
+if (queryParams.debug) {
+    // ここに debug モードを有効にする処理を追加
+    document.getElementById("debug").style.visibility = "visible";
+    document.getElementById("debug2").style.visibility = "visible";
+    document.getElementById("debug3").style.visibility = "visible";
+}
