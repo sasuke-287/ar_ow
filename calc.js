@@ -165,16 +165,16 @@ function culcViewAngle() {
 
   document.getElementById("debug3").innerText = angleDifference;
 
-  if (angleDifference <= 30) {
-    // 30度以下なら緑円を表示
+  if (angleDifference <= 15) {
+    // 15度以下なら緑円を表示
     document.getElementById("near_signal_scope_left").style.visibility =
       "hidden";
     document.getElementById("near_signal_scope_right").style.visibility =
       "hidden";
     document.getElementById("signal_scope").style.visibility = "visible";
     document.getElementById("display").style.visibility = "visible";
-  } else if (angleDifference <= 90) {
-    // 90度以下なら両側の半円を表示
+  } else if (angleDifference <= 60) {
+    // 60度以下なら両側の半円を表示
     document.getElementById("near_signal_scope_left").style.visibility =
       "visible";
     document.getElementById("near_signal_scope_right").style.visibility =
