@@ -173,6 +173,8 @@ function culcViewAngle() {
       "hidden";
     document.getElementById("signal_scope").style.visibility = "visible";
     document.getElementById("display").style.visibility = "visible";
+
+    phasespeed = 0.15;
   } else if (angleDifference <= 60) {
     // 60度以下なら両側の半円を表示
     document.getElementById("near_signal_scope_left").style.visibility =
@@ -196,6 +198,8 @@ function culcViewAngle() {
       "--near_signal_left_and_right",
       nearSignalPosition + "vmin"
     );
+
+    phasespeed = 0.08;
   } else {
     // それ以外なら出さない
     document.getElementById("near_signal_scope_left").style.visibility =
@@ -204,6 +208,8 @@ function culcViewAngle() {
       "hidden";
     document.getElementById("signal_scope").style.visibility = "hidden";
     document.getElementById("display").style.visibility = "hidden";
+
+    phasespeed = 0.05;
   }
 }
 
@@ -230,9 +236,9 @@ const ctx = canvas.getContext("2d");
 
 // 波のパラメータ
 const amplitude = 50; // 振幅
-var frequency = 0.05 + directionView / 360 * 0.2; // 周波数
+var frequency = 0.05; // 周波数
 var phase = 0; // 位相
-var phasespeed = 0.05 + directionView / 360 * 0.1;
+var phasespeed = 0.05;
 
 function drawWave() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
