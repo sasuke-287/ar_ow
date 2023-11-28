@@ -22,7 +22,7 @@ const boardgame = {
   altitude: 45,
 };
 
-var target = izakaya;
+var target = boardgame;
 
 window.onload = () => {
   if (!navigator.geolocation) return;
@@ -217,10 +217,10 @@ function handleClick() {
   if (clickCount % 5 === 0) {
     if (clickCount % 10 === 0) {
       // 10回ごとの処理
-      target = izakaya;
+      target = boardgame;
     } else {
       // 5回ごとの処理
-      target = boardgame;
+      target = izakaya;
     }
   }
 }
